@@ -13,9 +13,13 @@ if len(sys.argv) > 1:
     print('Opening:',fileName,'\n')
 
 else:
-    fileName = 'dataFiles/ToT_10ns_pw.txt'
-    # print('No Arguments Passed.\nExiting script.')
-    # sys.exit()
+    # fileName = 'dataFiles/Run3_ToT_0_0.txt'
+    print('No Arguments Passed.\nExiting script.')
+    sys.exit()
+
+run = fileName[13:-12] 
+board = fileName[-7]
+channel = fileName[-5]
 
 f = open(fileName,'r')
 data = f.readlines()
@@ -31,6 +35,7 @@ for i in range(events):
 	if int(data[i]) == 0:continue
 	h1.SetBinContent(i,int(data[i]))
 c1.cd(1)
+h1.SetTitle('Run#'+ run + '_channel#' + channel)
 h1.Draw()
 
 c1.SaveAs('plot.pdf')
